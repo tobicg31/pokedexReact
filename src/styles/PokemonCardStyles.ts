@@ -56,5 +56,54 @@ export const styles = StyleSheet.create({
   lineHeight: 22,
   fontSize: 15,
   color: "#444",
+  },
+  addButton: {
+    marginTop: 20,
+    backgroundColor: "#4CAF50",
+    padding: 12,
+    borderRadius: 10,
+    width: "100%",
+    alignItems: "center",
+  },
+    addButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  modalBackground: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modal: {
+      width: "85%",
+      backgroundColor: "white",
+      borderRadius: 15,
+      padding: 20,
+  },
+  modalTitle: {
+      fontSize: 22,
+      fontWeight: "bold",
+      marginBottom: 15,
+      textAlign: "center",
+  },
+  teamButton: {
+      backgroundColor: "#E53935",
+      padding: 15,
+      borderRadius: 10,
+      marginVertical: 5,
+  },
+  teamButtonText: {
+      color: "white",
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: 17,
+  },
+  cancel: {
+      textAlign: "center",
+      marginTop: 20,
+      fontSize: 17,
+      color: "#666",
   }
 });

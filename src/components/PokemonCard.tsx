@@ -3,6 +3,9 @@ import { Image, StyleSheet } from "react-native";
 import { styles } from '../styles/PokemonCardStyles';
 import { pokemonTypeColors } from "../styles/PokemonTypeColors";
 import StatBar from "./StatBar";
+import { Pressable, Modal } from "react-native";
+import { useState } from "react";
+import { useTeams } from "../context/TeamContext";
 
 interface PokemonType {
   slot: number;
@@ -36,6 +39,10 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({pokemon} : PokemonCardProps) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const { teams, addPokemonToTeam } = useTeams();
+
   return (
     <View style={styles.card}>
         <Text>#{pokemon.id}</Text>
@@ -76,6 +83,48 @@ export default function PokemonCard({pokemon} : PokemonCardProps) {
         <Text style={styles.description}>
           {pokemon.description}
         </Text>
+        <Pressable
+            style={styles.addButton}
+            onPress={() => setModalVisible(true)}
+        >
+            <Text style={styles.addButtonText}>
+                ➕ Agregar a un equipo
+            </Text>
+        </Pressable>
+        <Modal
+            visible={modalVisible}
+            transparent
+            animationType="fade"
+        >
+            <View style={styles.modalBackground}>       
+                <View style={styles.modal}>
+                    <Text style={styles.modalTitle}>
+                        Elegí un equipo
+                    </Text>
+                    {teams.map(team => (
+                        <Pressable
+                            key={team.id}
+                            style={styles.teamButton}
+                            onPress={() => {
+                                addPokemonToTeam(team.id, pokemon.id);
+                                setModalVisible(false);
+                            }}
+                        >
+                            <Text style={styles.teamButtonText}>
+                                {team.name}
+                            </Text>
+                        </Pressable>
+                    ))}
+                    <Pressable
+                        onPress={() => setModalVisible(false)}
+                    >
+                        <Text style={styles.cancel}>
+                            Cancelar
+                        </Text>
+                    </Pressable>
+                </View>
+            </View>
+        </Modal>
         {pokemon.stats.map((stat) => (
           <StatBar
             key={stat.stat.name}

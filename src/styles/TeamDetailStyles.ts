@@ -1,0 +1,46 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+    container:{
+        flexGrow:1,
+        backgroundColor:"#F3F4F6",
+        padding:20,
+    },
+    title:{
+        fontSize:30,
+        fontWeight:"bold",
+        marginBottom:25,
+        textAlign:"center",
+    },
+    slot:{
+        backgroundColor:"white",
+        marginBottom:12,
+        borderRadius:12,
+        padding:18,
+        flexDirection:"row",
+        alignItems:"center",
+        elevation:2,
+    },
+    slotNumber:{
+        fontWeight:"bold",
+        fontSize:20,
+        marginRight:15,
+    },
+    slotText:{
+        fontSize:18,
+    },
+    button:{
+        marginTop:25,
+        marginBottom:25,
+        backgroundColor:"#4CAF50",
+        width:"100%",
+        padding:18,
+        borderRadius:12,
+        alignItems:"center",
+    },
+    buttonText:{
+        color:"white",
+        fontSize:18,
+        fontWeight:"bold",
+    }
+});

@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import TeamsScreens from "../screens/TeamsScreens";
 import {RootStackParamList}  from "./navigationtypes";
+import TeamDetailScreen from "../screens/TeamDetailScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,6 +37,13 @@ export default function AppNavigator() {
           options={{
             title: "Mis Equipos",
           }}
+        />
+        <Stack.Screen
+            name="TeamDetail"
+            component={TeamDetailScreen}
+            options={{
+                title: "Equipo"
+            }}
         />
       </Stack.Navigator>
     </NavigationContainer>
