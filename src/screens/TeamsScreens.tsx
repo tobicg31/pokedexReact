@@ -22,8 +22,7 @@ export default function TeamsScreen(){
             <Text style={styles.title}>
                 Mis Equipos
             </Text>
-            {
-                teams.map(team => (
+            {teams.map(team => (
                     <TeamCard
                         key={team.id}
                         name={team.name}

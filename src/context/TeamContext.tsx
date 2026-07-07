@@ -1,4 +1,7 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@pokedex_teams";
 
 export interface Team {
   id: number;
@@ -26,6 +29,27 @@ export function TeamProvider({ children }: { children: ReactNode }) {
       pokemons: [],
     },
   ]);
+
+  useEffect(() => {
+    const loadTeams = async () => {
+        try {
+            const json = await AsyncStorage.getItem(STORAGE_KEY);
+            if (json) {
+                setTeams(JSON.parse(json));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    loadTeams();
+  }, []);
+
+  useEffect(() => {
+      AsyncStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(teams)
+      );
+  }, [teams]);
 
   const removePokemonFromTeam = (teamId: number,pokemonId: number) => {
     setTeams((prev) =>

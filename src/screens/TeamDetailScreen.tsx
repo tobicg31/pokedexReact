@@ -16,9 +16,7 @@ type TeamDetailRouteProp = RouteProp<
 export default function TeamDetailScreen() {
     const route = useRoute<TeamDetailRouteProp>();
     const { teamId } = route.params;
-    const { teams } = useTeams();
-    const {deleteTeam} = useTeams();
-    const {renameTeam} = useTeams();
+    const {teams, deleteTeam, renameTeam} = useTeams();
     const [modalVisible, setModalVisible] = useState(false);
     const team = teams.find(t => t.id === teamId);
     const [newName, setNewName] = useState(team?.name ?? "");
@@ -60,147 +58,100 @@ export default function TeamDetailScreen() {
             >
                 <Text style={styles.buttonText}>Borrar Equipo</Text>
             </Pressable>
-            {
-                Array.from({ length: 6 }).map((_, index) => {
-                    const pokemon = team.pokemons[index];
-                    return (
-                        <View
-                            key={index}
-                            style={styles.slot}
-                        >
-                            <Text style={styles.slotNumber}>
-                                {index + 1}.
-                            </Text>
-                            <PokemonTeamCard
-                                pokemonId={pokemon}
-                                teamId={team.id}
-                            />
-                        </View>
-                    );
-                })
+            {team.pokemons.map((pokemonId, index) => (
+                <View
+                    key={pokemonId}
+                    style={styles.slot}
+                >
+                    <Text style={styles.slotNumber}>
+                        {index + 1}.
+                    </Text>
+                    <PokemonTeamCard
+                        pokemonId={pokemonId}
+                        teamId={team.id}
+                    />
+                </View>
+                ))
+            }
+            {Array.from({length: 6 - team.pokemons.length,}).map((_, index) => (
+                <View
+                        key={`empty-${index}`}
+                        style={styles.slot}
+                    >
+                    <Text style={styles.slotNumber}>
+                        {team.pokemons.length + index + 1}.
+                    </Text>
+                    <Text style={styles.slotText}>
+                        Vacío
+                    </Text>
+                </View>
+            ))
             }
             <Modal
                 visible={modalVisible}
                 transparent
                 animationType="fade"
-                >
-
+            >
                 <View
-                style={{
-
-                flex:1,
-
-                justifyContent:"center",
-
-                alignItems:"center",
-
-                backgroundColor:"rgba(0,0,0,.5)"
-
-                }}
+                    style={{
+                        flex:1,
+                        justifyContent:"center",
+                        alignItems:"center",
+                        backgroundColor:"rgba(0,0,0,.5)"
+                    }}
                 >
-
                 <View
-                style={{
-
-                backgroundColor:"white",
-
-                padding:20,
-
-                borderRadius:15,
-
-                width:"85%"
-
-                }}
+                    style={{
+                        backgroundColor:"white",
+                        padding:20,
+                        borderRadius:15,
+                        width:"85%"
+                    }}
                 >
-
-                <Text
-                style={{
-
-                fontSize:22,
-
-                fontWeight:"bold",
-
-                marginBottom:15
-
-                }}
-                >
-
-                Renombrar equipo
-
-                </Text>
-
-                <TextInput
-
-                value={newName}
-
-                onChangeText={setNewName}
-
-                style={{
-
-                borderWidth:1,
-
-                borderRadius:10,
-
-                padding:10
-
-                }}
-
-                />
-
-                <Pressable
-
-                style={{
-
-                backgroundColor:"#4CAF50",
-
-                padding:15,
-
-                marginTop:20,
-
-                borderRadius:10
-
-                }}
-
-                onPress={()=>{
-
-                renameTeam(
-
-                team.id,
-
-                newName
-
-                );
-
-                setModalVisible(false);
-
-                }}
-
-                >
-
-                <Text
-                style={{
-
-                textAlign:"center",
-
-                color:"white",
-
-                fontWeight:"bold"
-
-                }}
-                >
-
-                Guardar
-
-                </Text>
-
-                </Pressable>
-
+                    <Text
+                        style={{
+                            fontSize:22,
+                            fontWeight:"bold",
+                            marginBottom:15
+                        }}
+                    >
+                        Renombrar equipo
+                    </Text>
+                    <TextInput
+                        value={newName}
+                        onChangeText={setNewName}
+                        style={{
+                        borderWidth:1,
+                        borderRadius:10,
+                        padding:10
+                        }}
+                    />
+                    <Pressable
+                        style={{
+                            backgroundColor:"#4CAF50",
+                            padding:15,
+                            marginTop:20,
+                            borderRadius:10
+                        }}
+                        onPress={()=>{
+                            renameTeam(team.id,newName);
+                            setModalVisible(false);
+                            }
+                        }
+                    >
+                        <Text
+                            style={{
+                                textAlign:"center",
+                                color:"white",
+                                fontWeight:"bold"
+                        }}
+                        >
+                            Guardar
+                        </Text>
+                    </Pressable>
                 </View>
-
-                </View>
-
-            </Modal>
-        </ScrollView>
-    );
-    
+            </View>
+        </Modal>
+    </ScrollView>
+);    
 }
