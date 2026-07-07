@@ -36,20 +36,14 @@ export default function TeamDetailScreen() {
             <Text style={styles.title}>
                 {team.name}
             </Text>
-            <View
-                style={{
-                    flexDirection:"row",
-                    justifyContent:"center",
-                    marginBottom:20
-                }}
-            >
+            <View style={styles.editRow}>
             <Pressable
                 onPress={()=>{
                     setNewName(team.name);
                     setModalVisible(true);
                 }}
             >
-            <Text style={{fontSize:28}}>✏️</Text>
+            <Text style={styles.editIcon}>✏️</Text>
             </Pressable>
             </View>
             <Pressable
@@ -92,60 +86,25 @@ export default function TeamDetailScreen() {
                 transparent
                 animationType="fade"
             >
-                <View
-                    style={{
-                        flex:1,
-                        justifyContent:"center",
-                        alignItems:"center",
-                        backgroundColor:"rgba(0,0,0,.5)"
-                    }}
-                >
-                <View
-                    style={{
-                        backgroundColor:"white",
-                        padding:20,
-                        borderRadius:15,
-                        width:"85%"
-                    }}
-                >
-                    <Text
-                        style={{
-                            fontSize:22,
-                            fontWeight:"bold",
-                            marginBottom:15
-                        }}
-                    >
+                <View style={styles.modalBackground}>
+                <View style={styles.modal}>
+                    <Text style={styles.modalTitle}>
                         Renombrar equipo
                     </Text>
                     <TextInput
                         value={newName}
                         onChangeText={setNewName}
-                        style={{
-                        borderWidth:1,
-                        borderRadius:10,
-                        padding:10
-                        }}
+                        style={styles.modalInput}
                     />
                     <Pressable
-                        style={{
-                            backgroundColor:"#4CAF50",
-                            padding:15,
-                            marginTop:20,
-                            borderRadius:10
-                        }}
+                        style={styles.modalSaveButton}
                         onPress={()=>{
                             renameTeam(team.id,newName);
                             setModalVisible(false);
                             }
                         }
                     >
-                        <Text
-                            style={{
-                                textAlign:"center",
-                                color:"white",
-                                fontWeight:"bold"
-                        }}
-                        >
+                        <Text style={styles.modalSaveButtonText}>
                             Guardar
                         </Text>
                     </Pressable>

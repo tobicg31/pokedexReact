@@ -5,6 +5,7 @@ import HomeScreen from "../screens/HomeScreen";
 import TeamsScreens from "../screens/TeamsScreens";
 import {RootStackParamList}  from "./navigationtypes";
 import TeamDetailScreen from "../screens/TeamDetailScreen";
+import { colors } from "../styles/theme";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -15,7 +16,7 @@ export default function AppNavigator() {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#E53935",
+            backgroundColor: colors.primary,
           },
           headerTintColor: "#fff",
           headerTitleStyle: {

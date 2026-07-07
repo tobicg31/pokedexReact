@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { styles } from '../styles/StatBarStyles';
+import { styles, statBarColors } from '../styles/StatBarStyles';
 
 interface StatBarProps {
   name: string;
@@ -7,14 +7,14 @@ interface StatBarProps {
 }
 
 export default function StatBar({ name, value }: StatBarProps) {
-    
-  const getBarColor = (value: number) => {
-    if (value < 40) return "#F44336";      // Rojo
-    if (value < 70) return "#FF9800";      // Naranja
-    if (value < 100) return "#FFEB3B";     // Amarillo
-    if (value < 130) return "#4CAF50";     // Verde
 
-    return "#2196F3";                      // Azul
+  const getBarColor = (value: number) => {
+    if (value < 40) return statBarColors.low;
+    if (value < 70) return statBarColors.medium;
+    if (value < 100) return statBarColors.high;
+    if (value < 130) return statBarColors.veryHigh;
+
+    return statBarColors.max;
   };
   return (
     <View style={styles.container}>

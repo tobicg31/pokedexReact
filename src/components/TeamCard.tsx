@@ -16,8 +16,7 @@ export default function TeamCard({name, onPress}:TeamCardProps){
                 {name}
             </Text>
 
-            <Text style={styles.arrow}>
-            </Text>
+            <Text style={styles.arrow}>›</Text>
         </Pressable>
     )
 }

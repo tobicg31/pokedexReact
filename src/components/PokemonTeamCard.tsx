@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 
 import { useTeams } from "../context/TeamContext";
+import { styles } from "../styles/PokemonTeamCardStyles";
 
 interface Props {
-
     pokemonId:number;
-
     teamId:number;
-
 }
 
 export default function PokemonTeamCard({pokemonId,teamId}:Props){
@@ -26,47 +24,26 @@ export default function PokemonTeamCard({pokemonId,teamId}:Props){
     if(!pokemon)
         return null;
     return(
-        <View
-            style={{
-                flexDirection:"row",
-                alignItems:"center",
-                backgroundColor:"white",
-                marginVertical:8,
-                padding:15,
-                borderRadius:12
-            }}
-            >
+        <View style={styles.card}>
             <Image
                 source={{
                     uri:pokemon.sprites.front_default
                 }}
-                style={{
-                    width:70,
-                    height:70
-                }}
+                style={styles.sprite}
             />
 
-            <View
-                style={{
-                    flex:1
-                }}
-            >
-                <Text
-                    style={{
-                        fontSize:20,
-                        fontWeight:"bold"
-                    }}
-                >
+            <View style={styles.info}>
+                <Text style={styles.name}>
                 {pokemon.name.toUpperCase()}
                 </Text>
-                <Text>#{pokemon.id}</Text>
+                <Text style={styles.id}>#{pokemon.id}</Text>
             </View>
             <Pressable
                 onPress={()=>
                     removePokemonFromTeam(teamId,pokemonId)
                 }
             >
-                <Text style={{fontSize:24}}>❌</Text>
+                <Text style={styles.removeIcon}>❌</Text>
             </Pressable>
         </View>
     )

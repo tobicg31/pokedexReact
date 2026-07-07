@@ -14,6 +14,7 @@ import { styles } from "../styles/HomeScreenStyles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/navigationtypes";
+import { colors } from "../styles/theme";
 
 export default function HomeScreen() {
   const navigation =  useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -135,7 +136,7 @@ export default function HomeScreen() {
       {loading && (
         <ActivityIndicator
           size="large"
-          color="#E53935"
+          color={colors.primary}
         />
       )}
 
